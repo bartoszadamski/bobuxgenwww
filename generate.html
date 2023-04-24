@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://js.hcaptcha.com/1/api.js?hl=pl" async defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Bobux Generator</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link href="transitions.css" rel="stylesheet" type="text/css" />
+  <link href="captcha.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <div class="transition is-active transition-1"></div>
+  <div class="cont1">
+    <a href="index.html">
+      <p class="title">Yato's Bobux Generator</p>
+    </a>
+    <p class="text1">Insert your info and get your free bobus!</p>
+    <div class="buttongen">
+      <button id="generatebut" href="youtube.com" onclick="generate();" class="noselect"></button>
+    </div>
+    <div id="welcomeDiv" style="display: none;" class="answer_list">
+      <p class="text1">Before we start, you have to input your information and pass that quick human verification.</p>
+      <div class="captcha">
+        <div class="username-form">
+          <input type="text" id="username-form" placeholder="Enter Roblobs username here">
+        </div>
+        <div class="slidecontainer">
+          <input type="range" min="100" max="10000" value="5000" class="slider" id="myRange">
+          <p class="valuebobus">Bobus value: <span id="demo"></span></p>
+        </div>
+        <label for="captcha-input"> Enter Captcha</label>
+        <div class="login-background">
+          <div class="preview"></div>
+        </div>
+        <div class="captcha-form">
+          <input type="text" id="captcha-form" placeholder="Enter Captcha text">
+          <a class="captcha-refresh"><i class="fa fa-refresh" aria-hidden="true"></i></a>
+          <br><br>
+
+        </div>
+      </div>
+      <a id="login-btn">
+        Submit that shi... info!
+      </a>
+    </div>
+    <div id="finalDiv" style="display: none;" class="answer_list">
+      <p id="infoUser">Username: None</p>
+      <p id="infoAmount">0 Bloborobux</p>
+      <div class="buttongen">
+        <button id="generatebut" href="#" onclick="tajmout();" class="noselect"></button>
+      </div>
+    </div>
+  </div>
+  </div>
+  <script>
+    function tajmout() {
+      setTimeout(window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ", 4000);
+    }
+    (function () {
+      const fonts = ["cursive", "sans-serif", "serif", "Poppins"];
+      let captchaValue = "";
+      function generateCaptcha() {
+        let value = btoa(Math.random() * 1000000000);
+        value = value.substr(0, 5 + Math.random() * 5);
+        captchaValue = value;
+      }
+      function setCaptcha() {
+        let html = captchaValue.split("").map((char) => {
+          const rotate = -20 + Math.trunc(Math.random() * 30);
+          const font = Math.trunc(Math.random() * fonts.lenght);
+          return `<span
+            style="
+              transform:rotate(${rotate}deg);
+              font-family:${fonts[font]}
+            "
+          >${char}</span>`;
+        }).join("");
+        document.querySelector(".captcha .preview").innerHTML = html;
+      }
+      function initCaptcha() {
+        document.querySelector(".captcha .captcha-refresh").addEventListener("click", function () {
+          generateCaptcha();
+          setCaptcha();
+        });
+        generateCaptcha();
+        setCaptcha();
+      }
+      initCaptcha();
+
+      document.querySelector("#login-btn").addEventListener("click", function () {
+        let inputCaptchaValue = document.querySelector(".captcha-form input").value;
+        if (inputCaptchaValue === captchaValue) {
+          hideDiv();
+          showFinalDiv();
+        } else {
+          document.getElementById('captcha-form').style.border = "2px solid red";
+          generateCaptcha();
+          setCaptcha();
+        }
+      });
+    })();
+
+  </script>
+  <script src="script.js"></script>
+  <script type="text/javascript">
+    function generate() {
+      const buttonik = document.getElementById('generatebut')
+
+      showDiv();
+      buttonik.style.display = 'none'
+    }
+    function showDiv() {
+      document.getElementById('welcomeDiv').style.display = "block";
+    }
+    function hideDiv() {
+      document.getElementById('welcomeDiv').style.display = "none";
+    }
+    function showFinalDiv() {
+      var usernamae = document.getElementById('username-form').value;
+      var robuxam = document.getElementById('myRange').value;
+      document.getElementById('finalDiv').style.display = "block";
+      document.getElementById('infoUser').innerHTML = "Username: " + usernamae;
+      document.getElementById('infoAmount').innerHTML = robuxam + " Bloborobux";
+    }
+  </script>
+
+  <!--
+  This script places a badge on your repl's full-browser view back to your repl's cover
+  page. Try various colors for the theme: dark, light, red, orange, yellow, lime, green,
+  teal, blue, blurple, magenta, pink!
+  -->
+  <!--   <script src="https://replit.com/public/js/replit-badge.js" theme="blue" defer></script> -->
+  <script>
+    var slider = document.getElementById("myRange");
+    var output = document.getElementById("demo");
+    output.innerHTML = slider.value;
+
+    slider.oninput = function () {
+      output.innerHTML = this.value;
+    }
+  </script>
+  <footer style="position: absolute; bottom: 5px;">
+    <p style="color: whitesmoke;">© 2023 - Idioci Here <br><a href="help.html">Help</a> <a href="tos.html">Terms</a>
+      <a href="why-us.html">Why us?</a>
+    </p>
+  </footer>
+
+  <!--   ANDROID KEYBOARD STYLE -->
+  <style>
+    /*media query to detect orientation change*/
+    @media (max-width: 800px) {
+      @media screen and (orientation: landscape) {
+
+        .title,
+        .text1 {
+          display: none;
+        }
+
+        #welcomeDiv {
+          align-content: center;
+        }
+
+        .captcha {
+          align-content: center;
+          align-items: center;
+
+        }
+      }
+    }
+    }
+  </style>
+  <!--   ANDROID KEYBOARD STYLE -->
+</body>
+
+</html>
